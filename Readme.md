@@ -1,4 +1,6 @@
 # Conference Call
+I see pp build its with nodejs so i build its with php ratchet
+
 A conference call implementation using WebRTC, [Ratchet Web Socket](https://github.com/ratchetphp/Ratchet).
 
 
