@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Description of server
- *
- * @author Amir <amirsanni@gmail.com>
- * @date 23-Dec-2016
- */
-
 // require 'vendor/autoload.php';
 require '../../vendor/autoload.php';
 
