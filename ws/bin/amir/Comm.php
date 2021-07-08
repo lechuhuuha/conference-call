@@ -51,7 +51,7 @@ class Comm implements MessageComponentInterface
     public function onMessage(ConnectionInterface $from,  $msg)
     {
         $data = json_decode(utf8_decode($msg));
-        echo 'sokecetID' . $data->sender;
+        // echo 'sokecetID' . $data->sender;
         $action = $data->action;
         $room = isset($data->room) ? $data->room : "";
 

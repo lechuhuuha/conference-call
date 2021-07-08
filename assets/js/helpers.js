@@ -20,7 +20,7 @@ export default {
     getQString(url = '', keyToReturn = '') {
         url = url ? url : location.href;
         let queryStrings = decodeURIComponent(url).split('#', 2)[0].split('?', 2)[1];
-
+        console.log("query strings", queryStrings);
         if (queryStrings) {
             let splittedQStrings = queryStrings.split('&');
 
@@ -104,7 +104,7 @@ export default {
     },
 
 
-    getIceServer() {
+    async getIceServer() {
         // "turns:eu-turn4.xirsys.com:5349?transport=tcp"
         // "turns:eu-turn4.xirsys.com:443?transport=tcp"
         // "turn:eu-turn4.xirsys.com:80?transport=tcp",
@@ -119,13 +119,12 @@ export default {
         //     ]
         // };
 
-        return fetch("/Server.php").then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-
-            throw new Error('Unable to process your request');
-        });
+        const res = await fetch("/Server.php");
+        if (res.ok) {
+            console.log(res);
+            return await res.json();
+        }
+        throw new Error('Unable to process your request');
     },
 
 

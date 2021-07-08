@@ -2,32 +2,32 @@
 import h from './helpers.js';
 
 const wsUrl = 'ws://localhost:8080';
-const ipTurnServer = 'turn:0.0.0.0';
+const ipTurnServer = 'turn:10.60.1.1:3478';
 const ipStunServer = 'stun:0.0.0.0:3478';
 
 
 var servers = {
-    // iceServers: [
-    //     {
-    //         "url": ipTurnServer,
-    //         "username": "ninefingers",
-    //         "credential": "youhavetoberealistic"
-    //     }
-    // ]
     iceServers: [
         {
-            "urls": [ipStunServer]
+            "url": ipTurnServer,
+            "username": "ninefingers",
+            "credential": "youhavetoberealistic"
         }
     ]
+    // iceServers: [
+    //     {
+    //         "urls": [ipStunServer]
+    //     }
+    // ]
 }
 
 window.addEventListener('load', () => {
     const room = h.getQString(location.href, 'room');
     const username = sessionStorage.getItem('username');
-
+    // disable due to i can create my own ice servers
     h.getIceServer().then((ice) => {
+        console.log(JSON.parse(ice))
         servers.iceServers = [ice];
-        console.log(ice);
     }).catch((e) => {
         console.log(e);
     });
@@ -76,8 +76,8 @@ window.addEventListener('load', () => {
 
 
         socket.onmessage = async (e) => {
-            var data = JSON.parse(e.data);
-            console.log(data);
+            var data = await JSON.parse(e.data);
+            console.log(data, data.action);
             if (data.room && (data.room == room)) {
                 switch (data.action) {
                     case 'newSub':
@@ -299,7 +299,7 @@ window.addEventListener('load', () => {
 
 
             pc[partnerName].onconnectionstatechange = (d) => {
-                console.log(d,'onconnectionstatechange');
+                console.log(d, 'onconnectionstatechange');
                 switch (pc[partnerName].iceConnectionState) {
                     case 'disconnected':
                     case 'failed':
