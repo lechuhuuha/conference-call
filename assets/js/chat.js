@@ -1,8 +1,8 @@
 
 import h from './helpers.js';
 
-const wsUrl = 'ws://localhost:8080';
-const ipTurnServer = 'turn:10.60.1.1:3478';
+const wsUrl = 'ws://192.168.100.8:8080';
+const ipTurnServer = 'turn:192.168.100.8';
 const ipStunServer = 'stun:0.0.0.0:3478';
 
 
